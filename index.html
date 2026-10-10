@@ -1,210 +1,539 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ahmed Asim Abdelhamid - CV</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: #f4f4f4;
-        }
-        .container {
-            background-color: #fff;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        }
-        h1, h2 {
-            color: #2c3e50;
-        }
-        h1 {
-            border-bottom: 2px solid #3498db;
-            padding-bottom: 10px;
-        }
-        .section {
-            margin-bottom: 30px;
-        }
-        .job-title {
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
-        .company {
-            font-style: italic;
-            color: #3498db;
-        }
-        ul {
-            padding-left: 20px;
-        }
-        .skills {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-        .skill {
-            background-color: #3498db;
-            color: white;
-            padding: 5px 10px;
-            border-radius: 5px;
-            font-size: 0.9em;
-        }
-    </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ahmed Asim — Lead SRE</title>
+<meta name="description" content="Ahmed Asim Abdelhamid — Lead Site Reliability Engineer in Riyadh. Kubernetes, OCI, Terraform, Argo CD, Vault, PostgreSQL/Patroni, MongoDB, Disaster Recovery.">
+<meta property="og:title" content="Ahmed Asim — Lead Site Reliability Engineer">
+<meta property="og:description" content="Interactive terminal resume. Kubernetes · OCI · Terraform · DR · Databases.">
+<meta property="og:url" content="https://ahmedasim.com/">
+<meta name="theme-color" content="#0b0f14">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%230b0f14'/><text x='5' y='22' font-family='monospace' font-size='16' font-weight='700' fill='%233fb950'>&gt;_</text></svg>">
+<style>
+:root{
+  --bg:#0b0f14;--panel:#0d1218;--bar:#090d12;--fg:#c9d1d9;--dim:#6e7781;
+  --acc:#3fb950;--acc2:#58a6ff;--warn:#d29922;--err:#f85149;--mag:#bc8cff;--border:#1f2630;
+}
+body.amber{--acc:#ffb000;--acc2:#ffd27a;--mag:#ff9e64}
+body.blue{--acc:#58a6ff;--acc2:#a5d6ff;--mag:#d2a8ff}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;background:var(--bg);color:var(--fg);
+  font-family:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:14px}
+body{display:flex;align-items:center;justify-content:center;padding:24px 16px;min-height:100vh}
+#rain{position:fixed;inset:0;z-index:0;opacity:.07;pointer-events:none}
+.win{position:relative;z-index:1;width:100%;max-width:980px;height:min(88vh,840px);
+  background:var(--panel);border:1px solid var(--border);border-radius:10px;
+  box-shadow:0 30px 80px rgba(0,0,0,.65),0 0 60px -20px var(--acc);
+  display:flex;flex-direction:column;overflow:hidden}
+.win::after{content:"";position:absolute;inset:0;pointer-events:none;
+  background:repeating-linear-gradient(0deg,rgba(255,255,255,.018) 0 1px,transparent 1px 3px)}
+.bar{display:flex;align-items:center;gap:8px;padding:10px 14px;background:var(--bar);border-bottom:1px solid var(--border)}
+.dot{width:12px;height:12px;border-radius:50%;flex:none}
+.title{flex:1;text-align:center;color:var(--dim);font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding-right:52px}
+.screen{flex:1;overflow-y:auto;padding:16px 18px 10px;line-height:1.55;cursor:text;scrollbar-width:thin;scrollbar-color:var(--border) transparent}
+.line{white-space:pre-wrap;word-break:break-word;min-height:1.55em}
+.inputline{display:flex;align-items:baseline;gap:0}
+#cmd{flex:1;min-width:0;background:transparent;border:0;outline:0;color:var(--fg);font:inherit;caret-color:var(--acc);padding:0}
+.chips{display:flex;flex-wrap:wrap;gap:6px;padding:10px 14px;border-top:1px solid var(--border);background:var(--bar)}
+.chip{font:inherit;font-size:12px;color:var(--fg);background:transparent;border:1px solid var(--border);border-radius:4px;padding:4px 10px;cursor:pointer;transition:.15s}
+.chip:hover,.chip:focus-visible{border-color:var(--acc);color:var(--acc);outline:none;box-shadow:0 0 12px -4px var(--acc)}
+.status{display:flex;justify-content:space-between;gap:12px;padding:3px 14px;background:var(--acc);color:#0b0f14;font-size:11px;font-weight:700;white-space:nowrap;overflow:hidden}
+.ascii{color:var(--acc);font-size:clamp(5px,calc((100vw - 56px) / 50),12.5px);line-height:1.15;text-shadow:0 0 10px var(--acc);white-space:pre;overflow:hidden}
+.g{color:var(--acc)}.k{color:var(--acc2)}.d{color:var(--dim)}.w{color:var(--warn)}.m{color:var(--mag)}.e{color:var(--err)}.b{font-weight:700}
+.glow{text-shadow:0 0 8px currentColor}
+.lnk{color:var(--acc2);cursor:pointer;text-decoration:underline dotted;text-underline-offset:3px}
+.lnk:hover{color:var(--acc)}
+a{color:var(--acc2)}a:hover{color:var(--acc)}
+.tag{display:inline-block;border:1px solid var(--border);border-radius:3px;padding:0 6px;margin:2px 4px 2px 0;color:var(--fg)}
+.cursor{display:inline-block;width:.6em;background:var(--acc);animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+@media (max-width:640px){
+  body{padding:0}
+  .win{height:100vh;height:100dvh;max-width:none;border-radius:0;border:0}
+  .screen{padding:12px}
+  .title{padding-right:0}
+  .status .hide-sm{display:none}
+}
+@media (prefers-reduced-motion:reduce){.cursor{animation:none}}
+</style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>Ahmed Asim Abdelhamid</h1>
-            <p>Senior DevOps/SRE Engineer</p>
-            <p>Email: ahmedassem.am@gmail.com | Phone: +966565116175 | Riyadh, Saudi Arabia</p>
-            <p>DOB: 08 Nov 1992 | Nationality: Egyptian</p>
-            <p>LinkedIn: <a href="https://linkedin.com/in/ahmed-asim" target="_blank">linkedin.com/in/ahmed-asim</a> | Website: <a href="https://ahmedasimabdelhamid.ink" target="_blank">ahmedasimabdelhamid.ink</a></p>
-        </header>
+<canvas id="rain" aria-hidden="true"></canvas>
 
-        <section class="section">
-            <h2>Profile</h2>
-            <p>Experienced SRE/DevOps Engineer with a strong focus on improving processes and boosting system efficiency. Skilled in Linux and Unix operating systems, with a proven track record in implementing automation solutions. Passionate about innovating in infrastructure management. Seeking a challenging position in a forward-thinking environment to apply my technical expertise and contribute to the success of the organization.</p>
-        </section>
+<main class="win" aria-label="Interactive terminal resume of Ahmed Asim">
+  <div class="bar">
+    <span class="dot" style="background:#ff5f56"></span>
+    <span class="dot" style="background:#ffbd2e"></span>
+    <span class="dot" style="background:#27c93f"></span>
+    <div class="title">ahmed@resume: ~ — bash — ahmedasim.com</div>
+  </div>
 
-        <section class="section">
-            <h2>Professional Experience</h2>
-            
-            <div>
-                <p class="job-title">Sr. SRE/DevOps Engineer</p>
-                <p class="company">HALA Payments | Jun 2023 – present | Riyadh, Saudi Arabia</p>
-                <ul>
-                    <li>Implemented Disaster Recovery Site, transitioning from Oracle Cloud to Alibaba Cloud with a 2-hour DR production switch time.</li>
-                    <li>Managed Cross-Site Replication for Percona MongoDB Clusters, handling over 20 TB of critical data on Alibaba Cloud.</li>
-                    <li>Introduced Tailscale as a secure VPN solution using Kubernetes deployments.</li>
-                    <li>Improved access control management using Teleport and Azure Active Directory.</li>
-                    <li>Collaborated with Cloudflare WAF to enhance infrastructure security.</li>
-                    <li>Managed HALA Infrastructure on Oracle Cloud using Terraform.</li>
-                    <li>Developed a Golang service for PagerDuty Critical Alerts via Slack.</li>
-                    <li>Configured and optimized Istio Service Mesh.</li>
-                    <li>Migrated 8 high-volume clusters (20TB) from Percona MongoDB to MongoDB Enterprise with Ops Manager.</li>
-                </ul>
-            </div>
-
-            <div>
-                <p class="job-title">Sr. DevOps Engineer</p>
-                <p class="company">Takamol Holding | Jul 2021 – May 2023 | Riyadh, Saudi Arabia</p>
-                <ul>
-                    <li>Managed infrastructure on STC Cloud and Oracle Cloud Infrastructure.</li>
-                    <li>Directed Kubernetes Clusters management, particularly within Oracle Kubernetes Engine.</li>
-                    <li>Utilized Helm charts and ArgoCD for efficient Kubernetes application management.</li>
-                    <li>Implemented Kubernetes cluster auto-scaling and Horizontal Pod Autoscaling.</li>
-                    <li>Deployed Nginx App Protect WAF and DOS solutions for web application security.</li>
-                    <li>Managed Elasticsearch clusters for caching critical governmental data.</li>
-                    <li>Facilitated microservices deployment through GitLab CI/CD pipelines.</li>
-                    <li>Collaborated on access control and secret management using Teleport and Vault.</li>
-                    <li>Utilized Docker and Docker Compose for application containerization and orchestration.</li>
-                    <li>Managed external DNS services with Cloudflare.</li>
-                    <li>Engaged with Postgres Database and Heimdall Data Proxy for database optimization.</li>
-                    <li>Participated in on-call shifts, responding to high-critical alerts 24/7.</li>
-                </ul>
-            </div>
-
-            <div>
-                <p class="job-title">Sr. Systems Administrator</p>
-                <p class="company">National Financing Services Company | Jun 2020 – Jul 2021 | Riyadh, Saudi Arabia</p>
-                <ul>
-                    <li>Managed servers, storage, and virtual infrastructure (VMware, DELL hardware).</li>
-                    <li>Administered network infrastructures, including PaloAlto and Pfsense firewalls, and Cisco switches.</li>
-                    <li>Maintained Active Directories, file sharing, IIS, LDAP, and DNS infrastructure.</li>
-                    <li>Managed Linux Ubuntu Servers across Datacenter and Cloud environments.</li>
-                    <li>Administered Cloud Environment (STC cloud), managing OpenStack backend and related services.</li>
-                    <li>Managed integration between LDMS, Brightware, and SADAD systems.</li>
-                    <li>Administered Avaya Systems and Microsoft SQL Databases.</li>
-                    <li>Implemented and configured scheduled backups using Restic.</li>
-                    <li>Installed and configured monitoring tools such as ManageEngine, Prometheus, and monit.</li>
-                </ul>
-            </div>
-
-            <div>
-                <p class="job-title">DevOps Engineer</p>
-                <p class="company">SlashTech | Dec 2019 – Jun 2020 | Dubai, United Arab Emirates</p>
-                <ul>
-                    <li>Developed infrastructure as code using Terraform and CloudFormation.</li>
-                    <li>Created Ansible playbooks for remote environment configuration on AWS cloud.</li>
-                    <li>Containerized applications and created Docker images from scratch.</li>
-                    <li>Established logging infrastructure using ELK stack and Filebeat.</li>
-                    <li>Implemented monitoring solutions with Prometheus and Grafana.</li>
-                    <li>Developed Jenkins pipelines for CI/CD processes.</li>
-                    <li>Managed MongoDB instances, including replication setup on AWS.</li>
-                    <li>Utilized AWS Trusted Advisor for performance optimization and cost reduction.</li>
-                </ul>
-            </div>
-
-            <div>
-                <p class="job-title">Product Technology Engineer (NA RSC – BSS – CBS Domain)</p>
-                <p class="company">Huawei Technologies | Oct 2018 – Nov 2019 | Cairo, Egypt</p>
-                <ul>
-                    <li>Led projects for MTN South Sudan, Airtel Congo B, and Tigo Senegal.</li>
-                    <li>Managed cloning of applications between Primary and Disaster Recovery environments.</li>
-                    <li>Conducted inspections and rectifications of CBS Modules and network elements.</li>
-                    <li>Provided post-launch support, including system performance monitoring and troubleshooting.</li>
-                </ul>
-            </div>
-
-            <div>
-                <p class="job-title">Linux and Unix Systems Engineer</p>
-                <p class="company">Code95 | Aug 2016 – Oct 2018 | Ismailia, Egypt</p>
-                <ul>
-                    <li>Provided 24/7 technical support to Code95 clients.</li>
-                    <li>Troubleshot Linux Web server and Mail Server issues.</li>
-                    <li>Utilized Ansible for server deployment and automation.</li>
-                    <li>Collaborated on CI/CD pipeline implementation using various DevOps tools.</li>
-                </ul>
-            </div>
-        </section>
-
-        <section class="section">
-            <h2>Education</h2>
-            <p><strong>Bachelor of Engineering in Communications and Electronics</strong></p>
-            <p>New Damietta Institute | New Damietta, Egypt | Jan 2015</p>
-            <p>Grade: Very Good</p>
-        </section>
-
-        <section class="section">
-            <h2>Certificates</h2>
-            <ul>
-                <li>Certified Kubernetes Administrator (CKA)</li>
-                <li>Certified Kubernetes Application Developer (CKAD)</li>
-                <li>Udemy DevOps Nanodegree</li>
-                <li>Redhat Certified System Administrator (RHCSA)</li>
-            </ul>
-        </section>
-
-        <section class="section">
-            <h2>Skills</h2>
-            <div class="skills">
-                <span class="skill">Kubernetes</span>
-                <span class="skill">Oracle Cloud Infrastructure</span>
-                <span class="skill">Alibaba Cloud Infrastructure</span>
-                <span class="skill">ArgoCD</span>
-                <span class="skill">Helm Charts</span>
-                <span class="skill">Terraform</span>
-                <span class="skill">Nginx WAF & DOS</span>
-                <span class="skill">Gitlab</span>
-                <span class="skill">Ansible</span>
-                <span class="skill">Elasticsearch</span>
-                <span class="skill">Prometheus</span>
-                <span class="skill">Grafana</span>
-                <span class="skill">Alert Manager</span>
-                <span class="skill">AWS</span>
-                <span class="skill">MySQL</span>
-                <span class="skill">MariaDB</span>
-                <span class="skill">MongoDB</span>
-                <span class="skill">CDNs (Cloudflare, Stack Path)</span>
-                <span class="skill">Linux Systems</span>
-                <span class="skill">MongoDB Enterprise</span>
-                <span class="skill">Percona MongoDB</span>
-            </div>
-        </section>
+  <div class="screen" id="screen">
+    <div id="out" aria-live="polite"></div>
+    <div class="inputline" id="inputline" style="visibility:hidden">
+      <span id="ps1"></span><input id="cmd" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Type a command">
     </div>
+  </div>
+
+  <nav class="chips" aria-label="Quick commands">
+    <button class="chip" data-cmd="whoami">whoami</button>
+    <button class="chip" data-cmd="experience">experience</button>
+    <button class="chip" data-cmd="projects">projects</button>
+    <button class="chip" data-cmd="skills">skills</button>
+    <button class="chip" data-cmd="certs">certs</button>
+    <button class="chip" data-cmd="neofetch">neofetch</button>
+    <button class="chip" data-cmd="contact">contact</button>
+    <button class="chip" data-cmd="help">help</button>
+  </nav>
+
+  <div class="status">
+    <span>[resume] 0:bash*</span>
+    <span class="hide-sm" id="uptime"></span>
+    <span id="clock">Riyadh</span>
+  </div>
+</main>
+
+<noscript>
+  <div style="max-width:760px;margin:40px auto;padding:16px;font-family:monospace;color:#c9d1d9">
+    <h1>Ahmed Asim Abdelhamid — Lead Site Reliability Engineer</h1>
+    <p>Riyadh, Saudi Arabia · ahmedassem.am@gmail.com · linkedin.com/in/ahmed-asim</p>
+    <p>Lead SRE at Hala (Jun 2023 – present), leading 8 engineers. Kubernetes (CKA, CKAD), OCI, Alibaba Cloud, Terraform, Argo CD, Vault, Patroni PostgreSQL, MongoDB Enterprise, Disaster Recovery.</p>
+  </div>
+</noscript>
+
+<script>
+(() => {
+"use strict";
+
+/* ---------------- data ---------------- */
+const ME = {
+  name: "Ahmed Asim Abdelhamid",
+  title: "Lead Site Reliability Engineer",
+  location: "Riyadh, Saudi Arabia",
+  email: "ahmedassem.am@gmail.com",
+  linkedin: "https://linkedin.com/in/ahmed-asim",
+  site: "https://ahmedasimabdelhamid.github.io/",
+  careerStart: new Date(2016, 7, 1)
+};
+
+const EXP = [
+  { id:"hala", role:"Lead Site Reliability Engineer", co:"Hala", when:"Jun 2023 – Present", where:"Riyadh, KSA", pts:[
+    "Lead a team of <b>8 SRE engineers</b> — day-to-day operations, mentoring and the reliability roadmap.",
+    "Deployed <b>HashiCorp Vault</b> in HA and migrated <b>130+ microservices</b> from plaintext to dynamic secrets (External Secrets Operator + Vault Reloader).",
+    "Adopted GitOps: rolled out <b>Argo CD</b> and moved 130+ microservices from Helmfile to fully declarative deployments.",
+    "Designed a <b>hub-and-spoke network on OCI</b> with dedicated east-west and north-south firewalls.",
+    "Provisioned a full <b>DR site in OCI Riyadh</b> with Terraform for reproducible infrastructure and fast failover.",
+    "Ran a <b>7-day full production failover to Alibaba Cloud</b> (5 business days) and failed back with minimal downtime.",
+    "Migrated <b>8 high-volume MongoDB clusters (20 TB)</b> from Percona to MongoDB Enterprise + Ops Manager, with cross-site replication and Ops Manager DR.",
+    "Run <b>Patroni PostgreSQL</b> HA clusters for critical payment workloads.",
+    "Introduced <b>Kong API Gateway</b> as the central ingress — rate limiting, auth and traffic management.",
+    "Tuned the <b>Istio</b> service mesh; built access with <b>Teleport</b>, <b>Tailscale</b> (K8s subnet routers) and Azure AD; Cloudflare WAF.",
+    "Built CI/CD for Node.js and .NET services, and a <b>Go</b> service that fires PagerDuty critical alerts from a Slack command."
+  ]},
+  { id:"takamol", role:"Sr. DevOps Engineer", co:"Takamol Holding", when:"Jul 2021 – May 2023", where:"Riyadh, KSA", pts:[
+    "Owned infrastructure on <b>Oracle Cloud</b> and <b>STC Cloud</b>; managed OKE Kubernetes clusters.",
+    "Cluster autoscaling in production and HPA across all environments.",
+    "Helm + <b>Argo CD</b> GitOps; GitLab CI/CD pipelines for microservices.",
+    "Deployed <b>Nginx App Protect WAF & DoS</b>; Pritunl VPN and F5 for secure access.",
+    "Ran Elasticsearch clusters caching governmental data, with <b>zero-downtime rolling upgrades</b>.",
+    "Teleport + Vault for access and secrets; Postgres with Heimdall Data Proxy; Cloudflare DNS; 24/7 on-call."
+  ]},
+  { id:"nfsc", role:"Sr. Systems Administrator", co:"National Financing Services Company", when:"Jun 2020 – Jul 2021", where:"Riyadh, KSA", pts:[
+    "VMware vCenter/vSphere on Dell PowerEdge R7525/R640 and PowerVault ME4024.",
+    "Palo Alto & pfSense firewalls, Cisco switching, OpenVPN and GlobalProtect.",
+    "Active Directory, LDAP, DNS, IIS, file sharing; Ubuntu servers; STC Cloud (OpenStack) administration.",
+    "Built and secured the <b>SFTP server used by Saudi banks</b> to exchange sensitive documents.",
+    "Restic backups for Oracle DB and WebLogic; monitoring with Prometheus, ManageEngine and monit.",
+    "LDMS / SADAD integrations, MS SQL administration, Avaya telephony."
+  ]},
+  { id:"slashtech", role:"DevOps Engineer", co:"SlashTech", when:"Dec 2019 – Jun 2020", where:"Dubai, UAE", pts:[
+    "Infrastructure as code on AWS with <b>Terraform</b> and CloudFormation; Ansible playbooks.",
+    "Containerized applications and built Docker images from scratch.",
+    "ELK logging with Filebeat; Prometheus, Grafana and Alertmanager → Slack.",
+    "Jenkins, CodePipeline and CodeDeploy CI/CD; 3-node MongoDB replica set on AWS."
+  ]},
+  { id:"huawei", role:"Product Technology Engineer (BSS / CBS)", co:"Huawei Technologies", when:"Oct 2018 – Nov 2019", where:"Cairo, Egypt", pts:[
+    "MTN South Sudan CBS 3.3 — cloned applications from primary to DR, integrated network elements, post-launch support.",
+    "Airtel Congo B and Tigo Senegal CBS 5.6 — inspection and rectification of CBS modules, E9000, Eudemon firewalls, switches and Huawei Storage V5500."
+  ]},
+  { id:"code95", role:"Linux & Unix Systems Engineer", co:"Code95", when:"Aug 2016 – Oct 2018", where:"Ismailia, Egypt", pts:[
+    "24/7 SLA-bound support; troubleshooting Apache, Nginx, MySQL, PHP and Varnish.",
+    "Mail platforms: cPanel, Postfix, Zimbra.",
+    "Server automation with Ansible; CI/CD with Git, Jenkins, Docker and Kubernetes."
+  ]}
+];
+
+const PROJECTS = [
+  ["dr-alibaba",  "Ran production from Alibaba Cloud for 7 days, then failed back to OCI — minimal downtime both ways."],
+  ["mongo-20tb",  "8 clusters / 20 TB moved from Percona to MongoDB Enterprise + Ops Manager, with DR replication."],
+  ["vault-130",   "130+ microservices moved off plaintext secrets to Vault dynamic secrets."],
+  ["gitops-130",  "130+ microservices moved from Helmfile to declarative Argo CD."],
+  ["oci-hub",     "Hub-and-spoke OCI network with dedicated east-west / north-south firewalls."],
+  ["oci-dr-tf",   "Full OCI Riyadh DR region built from Terraform."],
+  ["slack-pd",    "Go service: Slack slash command → PagerDuty critical alert."]
+];
+
+const SKILLS = [
+  ["cloud",         ["OCI","Alibaba Cloud","AWS","STC Cloud / OpenStack"]],
+  ["orchestration", ["Kubernetes","OKE","Helm","Argo CD","Istio","Docker"]],
+  ["iac",           ["Terraform","Ansible","CloudFormation"]],
+  ["databases",     ["PostgreSQL / Patroni","MongoDB Enterprise","Ops Manager","Percona MongoDB","MySQL","MariaDB","Elasticsearch"]],
+  ["security",      ["HashiCorp Vault","Teleport","Tailscale","Kong","Nginx App Protect","Cloudflare WAF","Azure AD"]],
+  ["observability", ["Prometheus","Grafana","Alertmanager","ELK","PagerDuty"]],
+  ["ci_cd",         ["GitLab CI","Jenkins","AWS CodePipeline","Argo CD"]],
+  ["os_lang",       ["Linux (RHCSA)","Go"]]
+];
+
+const CERTS = [
+  ["CKA",   "Certified Kubernetes Administrator"],
+  ["CKAD",  "Certified Kubernetes Application Developer"],
+  ["RHCSA", "Red Hat Certified System Administrator"],
+  ["—",     "Udemy DevOps Nanodegree"]
+];
+
+const BANNER = [
+  String.raw`    _    _   _ __  __ _____ ____         _    ____  ___ __  __ `,
+  String.raw`   / \  | | | |  \/  | ____|  _ \       / \  / ___||_ _|  \/  |`,
+  String.raw`  / _ \ | |_| | |\/| |  _| | | | |     / _ \ \___ \ | || |\/| |`,
+  String.raw` / ___ \|  _  | |  | | |___| |_| |    / ___ \ ___) || || |  | |`,
+  String.raw`/_/   \_\_| |_|_|  |_|_____|____/    /_/   \_\____/|___|_|  |_|`
+].join("\n");
+
+/* ---------------- terminal core ---------------- */
+const $ = s => document.querySelector(s);
+const out = $("#out"), screen = $("#screen"), input = $("#cmd"), inputLine = $("#inputline");
+const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+const esc = s => s.replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const pad = (s, n) => s + " ".repeat(Math.max(1, n - s.length));
+const lnk = (text, cmd) => `<span class="lnk" data-cmd="${esc(cmd || text)}">${text}</span>`;
+const PS1 = `<span class="g b">ahmed@resume</span><span class="d">:</span><span class="k">~</span><span class="d">$</span> `;
+$("#ps1").innerHTML = PS1;
+
+let busy = false, fast = false;
+const hist = []; let hi = 0;
+
+function line(html = "", cls = "line") {
+  const d = document.createElement("div");
+  d.className = cls;
+  d.innerHTML = html;
+  out.appendChild(d);
+  screen.scrollTop = screen.scrollHeight;
+  return d;
+}
+async function print(lines, delay = 16) {
+  for (const l of lines) {
+    line(l);
+    if (!fast && !reduce) await sleep(delay);
+  }
+}
+function years(from) {
+  const ms = Date.now() - from.getTime();
+  return (ms / (365.25 * 864e5)).toFixed(1);
+}
+
+/* ---------------- commands ---------------- */
+const CMDS = {
+  help: async () => print([
+    `<span class="b">Available commands</span> <span class="d">(click, or type — Tab completes, ↑/↓ history)</span>`,
+    "",
+    `  ${lnk("whoami")}${" ".repeat(10)}<span class="d">who I am</span>`,
+    `  ${lnk("experience")}${" ".repeat(6)}<span class="d">work history — try</span> ${lnk("experience hala")}`,
+    `  ${lnk("projects")}${" ".repeat(8)}<span class="d">highlights & war stories</span>`,
+    `  ${lnk("skills")}${" ".repeat(10)}<span class="d">tech stack</span>`,
+    `  ${lnk("certs")}${" ".repeat(11)}<span class="d">certifications</span>`,
+    `  ${lnk("education")}${" ".repeat(7)}<span class="d">degree</span>`,
+    `  ${lnk("contact")}${" ".repeat(9)}<span class="d">get in touch</span>`,
+    `  ${lnk("resume")}${" ".repeat(10)}<span class="d">download the PDF</span>`,
+    `  ${lnk("neofetch")}${" ".repeat(8)}<span class="d">system info</span>`,
+    `  ${lnk("theme amber")}${" ".repeat(5)}<span class="d">theme green | amber | blue</span>`,
+    `  ${lnk("clear")}${" ".repeat(11)}<span class="d">clear the screen</span>`,
+    "",
+    `<span class="d">psst… there are a few easter eggs. kubectl, sudo, ls…</span>`
+  ]),
+
+  whoami: async () => print([
+    `<span class="g b glow">${ME.name}</span>`,
+    `<span class="k">${ME.title}</span> <span class="d">@</span> <span class="b">Hala</span> <span class="d">· ${ME.location}</span>`,
+    "",
+    `SRE / DevOps engineer with ${years(ME.careerStart)} years keeping Linux, Kubernetes and`,
+    `databases boring — in the good way. I lead an 8-person SRE team at a`,
+    `Saudi payments company, and I like the unglamorous parts: disaster`,
+    `recovery that actually gets tested, secrets that aren't in plaintext,`,
+    `and deployments you can audit from git.`,
+    "",
+    `<span class="d">next →</span> ${lnk("experience")} <span class="d">·</span> ${lnk("projects")} <span class="d">·</span> ${lnk("contact")}`
+  ]),
+
+  experience: async (args) => {
+    const id = (args[0] || "").toLowerCase();
+    if (id === "all") {
+      for (const e of EXP) await showJob(e);
+      return;
+    }
+    if (id) {
+      const e = EXP.find(x => x.id === id || x.co.toLowerCase().includes(id));
+      if (!e) return print([`<span class="e">experience: no such job '${esc(id)}'</span>. Try ${lnk("experience")}.`]);
+      return showJob(e);
+    }
+    const lines = [`<span class="d">$ ls -l ~/career</span>`, ""];
+    for (const e of EXP) {
+      lines.push(`<span class="d">drwxr-x---</span>  <span class="w">${pad(e.when, 21)}</span>${lnk(pad(e.id, 11), "experience " + e.id)}<span class="b">${esc(e.role)}</span> <span class="d">@ ${esc(e.co)}</span>`);
+    }
+    lines.push("", `<span class="d">click a job, or run</span> ${lnk("experience all")}`);
+    return print(lines, 30);
+  },
+
+  projects: async () => {
+    const lines = [`<span class="d">$ git log --oneline --highlights</span>`, ""];
+    const hash = s => [...s].reduce((h, c) => (h * 31 + c.charCodeAt(0)) >>> 0, 7).toString(16).slice(0, 7).padStart(7, "0");
+    for (const [id, txt] of PROJECTS) lines.push(`<span class="w">${hash(id)}</span> <span class="m">(${id})</span> ${txt}`);
+    return print(lines, 40);
+  },
+
+  skills: async () => {
+    const lines = [`<span class="d"># skills.yaml</span>`];
+    for (const [k, v] of SKILLS) {
+      lines.push(`<span class="k">${k}</span><span class="d">:</span>`);
+      lines.push("  " + v.map(s => `<span class="tag">${esc(s)}</span>`).join(""));
+    }
+    return print(lines, 30);
+  },
+
+  certs: async () => print([
+    `<span class="d">$ openssl x509 -noout -subject -in ~/certs/*.pem</span>`, "",
+    ...CERTS.map(([s, n]) => `<span class="g">✔</span> <span class="b">${pad(s, 7)}</span>${n}`)
+  ], 40),
+
+  education: async () => print([
+    `<span class="b">B.Eng. Communications & Electronics</span>`,
+    `<span class="d">New Damietta Institute · New Damietta, Egypt · Jan 2015 · Grade: Very Good</span>`
+  ]),
+
+  contact: async () => print([
+    `<span class="d">$ cat contact.vcf</span>`, "",
+    `  <span class="k">email   </span> <a href="mailto:${ME.email}">${ME.email}</a>`,
+    `  <span class="k">linkedin</span> <a href="${ME.linkedin}" target="_blank" rel="noopener">linkedin.com/in/ahmed-asim</a>`,
+    `  <span class="k">location</span> ${ME.location}`,
+    "",
+    `<span class="g">Open to conversations about SRE, platform and infrastructure roles.</span>`
+  ]),
+
+  resume: async () => print([
+    `Downloading… <a href="resume.pdf" download>resume.pdf</a> <span class="d">(click if it didn't start)</span>`
+  ]).then(() => { const a = document.createElement("a"); a.href = "resume.pdf"; a.download = ""; a.click(); }),
+
+  neofetch: async () => {
+    const logo = [
+      "   .--.    ",
+      "  |o_o |   ",
+      "  |:_/ |   ",
+      " //   \\ \\  ",
+      "(|     | ) ",
+      "/'\\_   _/`\\",
+      "\\___)=(___/"
+    ];
+    const info = [
+      `<span class="g b">ahmed</span>@<span class="g b">hala</span>`,
+      `<span class="d">-----------</span>`,
+      `<span class="k">Role</span>: Lead SRE · team of 8`,
+      `<span class="k">Uptime</span>: ${years(ME.careerStart)} years (since Aug 2016)`,
+      `<span class="k">Clouds</span>: OCI, Alibaba, AWS, STC`,
+      `<span class="k">Orchestrator</span>: Kubernetes (CKA, CKAD)`,
+      `<span class="k">GitOps</span>: Argo CD · <span class="k">IaC</span>: Terraform`,
+      `<span class="k">Data</span>: Patroni PG, MongoDB Ent., ES`,
+      `<span class="k">Location</span>: Riyadh, SA`,
+      ["#f85149","#d29922","#3fb950","#58a6ff","#bc8cff","#c9d1d9"].map(c => `<span style="color:${c}">███</span>`).join("")
+    ];
+    const lines = [];
+    for (let i = 0; i < Math.max(logo.length, info.length); i++)
+      lines.push(`<span class="g">${esc(pad(logo[i] || "", 13))}</span>${info[i] || ""}`);
+    return print(lines, 25);
+  },
+
+  theme: async (args) => {
+    const t = (args[0] || "").toLowerCase();
+    if (!["green", "amber", "blue"].includes(t)) return print([`usage: theme ${lnk("theme green", "theme green")} | ${lnk("amber", "theme amber")} | ${lnk("blue", "theme blue")}`]);
+    document.body.classList.remove("amber", "blue");
+    if (t !== "green") document.body.classList.add(t);
+    try { localStorage.setItem("theme", t); } catch (e) {}
+    return print([`<span class="g">theme set to ${t}</span>`]);
+  },
+
+  clear: async () => { out.innerHTML = ""; },
+  history: async () => print(hist.map((h, i) => `<span class="d">${String(i + 1).padStart(4)}</span>  ${esc(h)}`)),
+  ls: async () => print([`${lnk("about.txt", "whoami")}  ${lnk("career/", "experience")}  ${lnk("skills.yaml", "skills")}  ${lnk("certs/", "certs")}  ${lnk("contact.vcf", "contact")}  ${lnk("resume.pdf", "resume")}`]),
+  cat: async (args) => {
+    const map = { "about.txt":"whoami", "skills.yaml":"skills", "contact.vcf":"contact" };
+    const f = args[0];
+    if (map[f]) return CMDS[map[f]]([]);
+    return print([`cat: ${esc(f || "")}: No such file or directory`]);
+  },
+  echo: async (args) => print([esc(args.join(" "))]),
+  pwd: async () => print(["/home/ahmed"]),
+  date: async () => print([new Date().toString()]),
+  sudo: async (args) => print(args.join(" ") === "hire-me" || args.join(" ") === "hire ahmed"
+    ? [`<span class="g">[sudo] access granted.</span> Opening ${lnk("contact")}…`]
+    : [`<span class="e">ahmed is not in the sudoers file.</span> This incident will be reported.`, `<span class="d">(hint: try</span> ${lnk("sudo hire-me")}<span class="d">)</span>`]),
+  rm: async () => print([
+    `<span class="e">rm: refusing to destroy production.</span>`,
+    `<span class="d">restoring from backup… 3-2-1-1-0 rule satisfied. nothing was lost.</span>`
+  ]),
+  kubectl: async (args) => {
+    if (args[0] !== "get") return print([`usage: ${lnk("kubectl get pods")}`]);
+    return print([
+      `<span class="d">NAME                          READY   STATUS    RESTARTS   AGE</span>`,
+      `ahmed-sre-7d9f8c6b5-x2k4p     1/1     <span class="g">Running</span>   0          ${Math.floor(years(ME.careerStart))}y`,
+      `coffee-sidecar-5b6cf-9qz1m    1/1     <span class="g">Running</span>   <span class="w">412</span>        ${Math.floor(years(ME.careerStart))}y`,
+      `on-call-pager-0               1/1     <span class="g">Running</span>   0          3y`,
+      `weekend-plans-6c8d-ttl0s      0/1     <span class="e">Evicted</span>   0          —`
+    ], 40);
+  },
+  exit: async () => print([`There is no exit. Only ${lnk("contact")}.`]),
+  vim: async () => print([`<span class="d">You are now trapped in vim. Just kidding — type</span> ${lnk("help")}`]),
+  ping: async () => print([`PING ahmedasim.com: 64 bytes, time=0.042 ms — <span class="g">99.99% available</span>`])
+};
+CMDS.about = CMDS.whoami;
+CMDS.exp = CMDS.experience;
+CMDS.man = CMDS.help;
+CMDS.cv = CMDS.resume;
+
+async function showJob(e) {
+  const lines = [
+    "",
+    `<span class="g b">▸ ${esc(e.role)}</span>`,
+    `  <span class="k b">${esc(e.co)}</span> <span class="d">· ${esc(e.where)} ·</span> <span class="w">${esc(e.when)}</span>`
+  ];
+  for (const p of e.pts) lines.push(`  <span class="g">›</span> ${p}`);
+  await print(lines, 28);
+}
+
+async function run(raw) {
+  const c = raw.trim();
+  line(PS1 + esc(c));
+  if (!c) return;
+  hist.push(c); hi = hist.length;
+  const [name, ...args] = c.split(/\s+/);
+  const fn = CMDS[name.toLowerCase()];
+  if (fn) await fn(args);
+  else await print([`<span class="e">bash: ${esc(name)}: command not found</span>. Type ${lnk("help")}.`]);
+  line("");
+}
+
+async function submit(value) {
+  if (busy) return;
+  busy = true; fast = false;
+  inputLine.style.visibility = "hidden";
+  await run(value);
+  inputLine.style.visibility = "visible";
+  busy = false;
+  screen.scrollTop = screen.scrollHeight;
+  if (matchMedia("(pointer:fine)").matches) input.focus();
+}
+
+async function typeAndRun(cmd) {
+  if (busy) return;
+  input.value = "";
+  if (!reduce) for (const ch of cmd) { input.value += ch; await sleep(28); }
+  input.value = "";
+  await submit(cmd);
+}
+
+/* ---------------- input handling ---------------- */
+input.addEventListener("keydown", e => {
+  if (e.key === "Enter") { const v = input.value; input.value = ""; submit(v); }
+  else if (e.key === "ArrowUp") { if (hi > 0) input.value = hist[--hi]; e.preventDefault(); }
+  else if (e.key === "ArrowDown") { hi = Math.min(hist.length, hi + 1); input.value = hist[hi] || ""; e.preventDefault(); }
+  else if (e.key === "Tab") {
+    e.preventDefault();
+    const v = input.value.toLowerCase();
+    const parts = v.split(/\s+/);
+    if (parts.length === 2 && parts[0] === "experience") {
+      const m = EXP.map(x => x.id).filter(id => id.startsWith(parts[1]));
+      if (m.length === 1) input.value = "experience " + m[0];
+      return;
+    }
+    const m = Object.keys(CMDS).filter(k => k.startsWith(v));
+    if (m.length === 1) input.value = m[0] + " ";
+    else if (m.length > 1) { line(PS1 + esc(input.value)); line(m.join("   ")); }
+  } else if (e.key === "l" && e.ctrlKey) { e.preventDefault(); out.innerHTML = ""; }
+});
+
+document.addEventListener("click", e => {
+  const t = e.target.closest("[data-cmd]");
+  if (t) { e.preventDefault(); typeAndRun(t.dataset.cmd); return; }
+  if (e.target.closest(".screen") && !window.getSelection().toString() && !busy) input.focus();
+});
+document.addEventListener("keydown", () => { if (busy) fast = true; });
+screen.addEventListener("touchstart", () => { if (busy) fast = true; }, { passive: true });
+
+/* ---------------- status bar ---------------- */
+function tick() {
+  try {
+    $("#clock").textContent = new Intl.DateTimeFormat("en-GB", { timeZone: "Asia/Riyadh", hour: "2-digit", minute: "2-digit", weekday: "short" }).format(new Date()) + " AST";
+  } catch (e) {}
+  $("#uptime").textContent = `uptime ${years(ME.careerStart)}y · load: low · pager: quiet`;
+}
+tick(); setInterval(tick, 30000);
+
+/* ---------------- matrix rain ---------------- */
+(function rain() {
+  if (reduce) return;
+  const cv = $("#rain"), ctx = cv.getContext("2d");
+  const chars = "01アイウエオカキクケコサシスセソタチツテトナニヌネノ{}[]<>$#";
+  let cols, drops, fs = 16;
+  function size() { cv.width = innerWidth; cv.height = innerHeight; cols = Math.ceil(cv.width / fs); drops = Array(cols).fill(0).map(() => Math.random() * -50); }
+  size(); addEventListener("resize", size);
+  let last = 0;
+  function frame(t) {
+    requestAnimationFrame(frame);
+    if (t - last < 60 || document.hidden) return; last = t;
+    ctx.fillStyle = "rgba(11,15,20,0.12)"; ctx.fillRect(0, 0, cv.width, cv.height);
+    ctx.fillStyle = getComputedStyle(document.body).getPropertyValue("--acc");
+    ctx.font = fs + "px monospace";
+    for (let i = 0; i < cols; i++) {
+      ctx.fillText(chars[(Math.random() * chars.length) | 0], i * fs, drops[i] * fs);
+      if (drops[i] * fs > cv.height && Math.random() > 0.975) drops[i] = 0;
+      drops[i]++;
+    }
+  }
+  requestAnimationFrame(frame);
+})();
+
+/* ---------------- boot ---------------- */
+async function boot() {
+  try { const t = localStorage.getItem("theme"); if (t && t !== "green") document.body.classList.add(t); } catch (e) {}
+  busy = true;
+  const ok = `<span class="d">[</span><span class="g">  OK  </span><span class="d">]</span>`;
+  await print([
+    `<span class="d">resume-os 6.6.0-sre (tty1) — press any key to skip</span>`,
+    `${ok} Mounted /home/ahmed`,
+    `${ok} Reached target <span class="b">Kubernetes</span> (CKA, CKAD)`,
+    `${ok} Started <span class="b">vault.service</span> — 130+ services, zero plaintext secrets`,
+    `${ok} Started <span class="b">argocd.service</span> — 130+ apps Synced / Healthy`,
+    `${ok} Started <span class="b">patroni.service</span> — leader elected`,
+    `${ok} Reached target <span class="b">Disaster Recovery</span> (OCI Riyadh · Alibaba Cloud)`,
+    `${ok} Started <span class="b">sre-team.slice</span> — 8 engineers online`,
+    ""
+  ], 110);
+  line(esc(BANNER), "ascii");
+  await print([
+    "",
+    `<span class="k">${ME.title}</span> <span class="d">· Riyadh, Saudi Arabia</span>`,
+    `<span class="d">Welcome. Type</span> ${lnk("help")} <span class="d">or tap a command below.</span>`,
+    ""
+  ], 60);
+  busy = false;
+  inputLine.style.visibility = "visible";
+  await sleep(fast ? 0 : 400);
+  await typeAndRun("whoami");
+}
+boot();
+})();
+</script>
 </body>
 </html>
